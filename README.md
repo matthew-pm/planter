@@ -2,6 +2,21 @@
 
 A web project starter for folks who hate setting up projects.
 
+## PM Edition
+
+Configured for a workflow that makes writing rich LPs for SFCC suck way less. 
+
+### Deploy
+Upload assets (`.js`, `.css`) to webdav endpoint via a terminal using `deploy.sh` at the project root. 
+
+```sh
+# Usage: ./deploy.sh <from> <to>
+> ./deploy.sh ./path/to/assets endpoint/path/to/project
+# Assuming an endpoint is exported in your .zshrc, e.g.: export WEBDAV=<endpoint-url>
+# you could run it like so:
+> ./deploy.sh ./dist/assets $WEBDAV/project/path
+```
+
 ## Overview
 
 Planter is for folks who want to quickly get started making a static site and utilize tools like Sass and modern JS (ES6+) without a framework, while retaining the simplicity of having little-to-no setup required. It uses:
