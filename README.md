@@ -1,8 +1,6 @@
 # Planter
 
-<p align='center'><img src='./static/planter-logo.svg' width='200'></p>
-
-<p align='center'><i>A web project starter for folks who hate setting up projects.</i></p>
+A web project starter for folks who hate setting up projects.
 
 ## Overview
 
