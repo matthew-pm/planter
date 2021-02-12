@@ -1,13 +1,23 @@
+
 module.exports = {
   site: {
-    title: 'My Site',
+    title: 'Planter',
     lang: 'en',
   },
   build: {
+    // dev, prod
     dir: './build',
     js: '',
     css: '',
     static: 'static',
+    shared: 'static/shared'
+  },
+  prod: {
+    root: 'some/project/path',
+    dir: './dist',
+    js: 'assets',
+    css: 'assets',
+    static: `images`,
   },
   styles: {
     entry: './src/styles/style.scss',

@@ -1,7 +1,7 @@
 const config = require('./planter-config');
 const utils = require('./planter-utils');
 const gulp = require('gulp');
-const { series } = require('gulp');
+const { series, parallel } = require('gulp');
 const merge = require('merge-stream')
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
@@ -18,6 +18,13 @@ const beautify = require('gulp-beautify');
 const terser = require('gulp-terser');
 const browserSync = require('browser-sync').create();
 
+const { prod } = require('./gulp.prod.js');
+
+
+
+
+
+
 // Configure global data (passed to handlebars)
 const DATA = {
   site: {
@@ -30,8 +37,8 @@ const DATA = {
       ? `${config.styles.output}`
       : `${config.build.css}/${config.styles.output}`,
     js: config.build.js === '' 
-    ? `${config.js.output}`
-    : `${config.build.js}/${config.js.output}`,
+      ? `${config.js.output}`
+      : `${config.build.js}/${config.js.output}`,
     // This is just the static directory
     // Usage: "{{@root.assets.static}}/image.png"
     static: `${config.build.static}`
@@ -58,14 +65,16 @@ function styles() {
 }
 
 // Compile JS using browserify & babel
-function js() {
+function js(prod) {
   return browserify({
       entries: config.js.entry, 
       debug: true
     })
     .transform(babelify, { presets: ['@babel/preset-env'], sourceMaps: true })
     .bundle()
-    .pipe(source(config.js.output))
+    .pipe(source(
+      config.js.output
+    ))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(gulpif(options.js, terser(options.js)))
@@ -79,6 +88,7 @@ function html() {
   return gulp.src(config.html.entry)
     .pipe(handlebars()
       .data(DATA)
+      .data({development: true})
       .data(config.html.match.data)
       .partials(config.html.match.partials)
       .helpers(require('handlebars-layouts'))
@@ -94,11 +104,11 @@ function html() {
 function static() {
   // Copy ./static and its contents to the build path
   const static = gulp.src(['./static/*', '!./static/favicon.*'])
-    .pipe(gulp.dest('./build/static/'));
+    .pipe(gulp.dest(`${config.build.dir}/${config.build.static}`));
 
   // Copy favicon files separately from the other static files
   const favicons = gulp.src('./static/favicon.*')
-  .pipe(gulp.dest('./build/'));
+  .pipe(gulp.dest(`${config.build.dir}`));
 
   return merge(static, favicons);
 }
@@ -122,6 +132,8 @@ function watch() {
     config.html.match.helpers,
     config.html.match.data,
   ], options, html).on('change', browserSync.reload);
+
+  gulp.watch('./build/*', { ignoreInitial: true }, prod);
 }
 
 function develop() {
@@ -132,15 +144,23 @@ function develop() {
   watch();  
 }
 
-function clean() {
-  return del(`${config.build.dir}/*`);
+function clean(cb, path, ext) {
+  if (path && ext) {
+    return del(`${path}/**/*.${ext}`);
+  }
+
+  del(`${config.build.dir}/*`);
+  del(`${config.prod.dir}/*`);
+  cb();
+  
+  // cb();
 }
 
 exports.styles = styles;
 exports.js = js;
 exports.html = html;
 exports.static = static;
-exports.build = series(styles, js, static, html);
+exports.build = series(styles, js, static, html, prod);
 exports.watch = watch;
 exports.develop = develop;
 exports.clean = clean;

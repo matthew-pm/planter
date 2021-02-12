@@ -10,7 +10,7 @@ module.exports.register = (handlebars) => {
     let result = '';
     let className = '';
 
-    if (currentName === name) className = 'active';
+    if (name && currentName === name) className = 'active';
 
     if (currentName !== 'externalLink') {
       result = `<a href="${url}" class="${className}">${text}</a>`;

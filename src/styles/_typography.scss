@@ -1,0 +1,13 @@
+// Typography mixins (based on staging:global.css
+@mixin font-palatino {
+  font-family: "Palatino", "Palatino Linotype", "Cormorant Garamond", serif;
+}
+@mixin font-helvetica {
+  font-family: "Helvetica Neue LT W05 55 Roman", "Helvetica Neue", "Montserrat", sans-serif;
+}
+@mixin font-helvetica-medium {
+  font-family: "Helvetica Neue LT W05 65 Medium", "Helvetica Neue Medium", "HelveticaNeue-Medium", "Montserrat", sans-serif;
+}
+@mixin font-helvetica-bold {
+  font-family: "Helvetica Neue LT W01_75 Bold", "Helvetica Neue Bold", "HelveticaNeue-Bold", "Montserrat", sans-serif;
+}

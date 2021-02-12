@@ -1,11 +1,9 @@
-{{#extend "layout" page="home"}}
-  {{#content "body" mode="prepend"}}
-    <div class="page">
-      <div class="demo">
-        <img class="logo" src="{{@root.assets.static}}/planter-logo.svg" alt="logo">
-        <h1>Welcome to Planter {{@root.planter.version}}</h1>
-        <p>A web project starter for folks who hate setting up projects.</p>
-      </div>
-    </div>
-  {{/content}}
-{{/extend}}
+{{#extend "page" }}{{#content "content"}}
+<div class="page">
+  <div class="demo">
+    <img class="logo" src="{{@root.assets.static}}/planter-logo.svg" alt="logo">
+    <h1>Welcome to Planter {{@root.planter.version}}</h1>
+    <p>A web project starter for folks who hate setting up projects.</p>
+  </div>
+</div>
+{{/content}}{{/extend}}

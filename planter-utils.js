@@ -1,3 +1,7 @@
+const crypto = require('crypto');
+
+const prod_env = (process.env.NODE_ENV === 'production');
+
 // Utilities
 function configureStyleOptions(opts) {
   if (opts.minify === false) return {};
@@ -35,10 +39,34 @@ function configureHtmlOptions(opts) {
   return options;
 }
 
+function envSwitch(dev, prod, force) {
+  if (prod_env || force) return prod;
+  return dev;
+}
+
+function hash() {
+  return crypto.randomBytes(3).toString('hex');
+}
+
+function replace(match, str) {
+  return str.replace(`[${match}]`)
+}
+
+function infix(infix, str) {
+  let parts = str.split('.');
+  return `${parts[0]}.${infix}.${parts[1]}`
+}
+
+
+
 module.exports = {
   configure: {
     css: configureStyleOptions,
     js: configureJsOptions,
     html: configureHtmlOptions,
-  }
+  },
+  envSwitch: envSwitch,
+  hash: hash,
+  replace: replace,
+  infix: infix,
 }

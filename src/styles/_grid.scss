@@ -1,0 +1,47 @@
+// FROM Bootstrap 4
+// Extra small devices (portrait phones, less than 576px)
+// No media query since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+$breakpointsMin: (
+  'xs': (min-width: 576px),
+  'sm': (min-width: 768px),
+  'md': (min-width: 992px),
+  'lg': (min-width: 1440px),
+  'xl': (min-width: 1600px),
+  'super': (min-width: 2000px),
+  'ultrawide': (min-width: 3000px),
+);
+$breakpointsMax: (
+  'xs': (max-width: 575.98px),
+  'sm': (max-width: 767.98px),
+  'md': (max-width: 991.98px),
+  'lg': (max-width: 1439.98px)
+);
+
+@mixin rmin($breakpoint) {
+  // Prints a media query based on the value
+  @media #{inspect(map-get($breakpointsMin, $breakpoint))} {
+    @content;
+  }
+}
+@mixin rminc($breakpoint) {
+  // Prints a media query based on the value
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin rmax($breakpoint) {
+  // Prints a media query based on the value
+  @media #{inspect(map-get($breakpointsMax, $breakpoint))} {
+    @content;
+  }
+}
+
+@mixin rmaxc($breakpoint) {
+  // Prints a media query based on the value
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
