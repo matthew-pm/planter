@@ -1,0 +1,117 @@
+.copy-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 1 * $base;
+  flex-direction: column;
+  @include rmin('md') {
+    font-size: 1.125 * $base;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @include rmax('md') {
+    padding: 0 $spacer;
+  }
+  &--first {
+    margin-top: $spacer * 1.5;
+    @include rmin('md') {
+      margin-top: $spacer * 3;
+    }
+  }
+  p {
+    margin: 0;
+  }
+  h1, h2, h3 {
+    margin: 0;
+  }
+  .heading {
+    margin-top: -3px;
+    margin-bottom: $spacer;
+    flex-basis: 100%;
+    text-align: center;
+    line-height: 1.2;
+    font-size: 1.5 * $base;
+    font-family: bodoni-urw, "Palatino LT Std", Palatino, Georgia, "Times New Roman", Times, serif;
+    font-weight: 500;
+    font-style: normal;
+    color: $color-navy;
+    @include rmin('md') {
+      font-size: 3 * $base;
+      margin-top: -7px;
+    }
+  }
+  .quote {
+    @include font-palatino;
+    font-weight: 700;
+    font-size: 1.5rem;
+    font-style: italic;
+    text-align: center;
+    color: $color-navy;
+    font-weight: 500;
+    @include rmin('md') {
+      font-size: 2.5rem;
+    }
+    @include rmin('xl') {
+      font-size: 3rem;
+    }
+    // @include rmin('xl') {
+    //   font-size: 3.75rem;
+    // }
+  }
+  .copy {
+    color: $color-navy;
+    margin-bottom: $spacer * 1.75;
+    text-align: center;
+    @include rmin('md') {
+      margin-bottom: $spacer * 3;
+    }
+    &--mb-static {
+      margin-bottom: $spacer * 2;
+      @include rmin('md') {
+        margin-bottom: $spacer * 2;
+      }
+    }
+    &--sub-heading {
+      font-size: 1.125 * $base;
+      color: $color-navy;
+      @include rmin('md') {
+        font-size: 1.5 * $base;
+      }
+    }
+    &--bold {
+      font-weight: bold;
+    }
+  }
+  .text-link {
+    // font-style: italic;
+    // font-family: $font-family-secondary;
+    color: $color-navy;
+    text-decoration: none;
+    @include rmax('md') {
+      margin-bottom: $spacer * .25;
+    }
+    // font-size: 1.125 * $base;
+    &:hover {
+      text-decoration: underline;
+    }
+    &:hover .text-link__arrow {
+      text-decoration: none;
+    }
+    &__arrow {
+      // margin-left: 6px;
+      transform: rotate(-90deg) scale(1.15);
+      margin: 0 0 .15rem .35rem;
+      // font-style: normal;
+      // font-weight: bold;
+      
+      // &::after {
+      //   // '⟩' &#10217;
+      //   display: inline-block;
+      //   margin-left: 6px;
+      //   content: '\27E9';
+      // }
+    }
+  }
+}

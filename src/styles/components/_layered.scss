@@ -1,0 +1,79 @@
+.layered {
+  display: block !important;
+  // position: static !important;
+  position: relative;
+  width: 100%;
+  padding-bottom: 15%;
+  @include rmin('md') {
+    padding-bottom: 4.25rem;
+  }
+  @include rmin('lg') {
+    padding-bottom: 6rem;
+  }
+  @include rmin('hi') {
+    padding-bottom: 5.75vw;
+  }
+
+  &__top {
+    position: absolute;
+    width: 100%;
+    right: 0;
+    padding: 1.5rem 1.5rem 0;
+    @include rmin('sm') {
+      padding: 2.5rem 2.5rem 0;
+    }
+    @include rmin('md') {
+      padding-top: 4rem;
+      padding-left: 8rem;
+      padding-right: unset;
+    }
+  }
+  &__bottom {
+    width: 100%;
+    @include rmin('md') {
+      width: 69%;
+    }
+  }
+}
+
+.tweak-mw-bottom {
+  .layered__bottom {
+    @include rmin('md') {
+      width: 85%;
+    }
+  }
+}
+
+.tweak-mw-top {
+  .layered__top {
+    @include rmin('md') {
+      padding-left: 6rem;
+    }
+  }
+}
+
+.layered__wrapper {
+  
+}
+
+.tweak-row-pb {
+  padding-bottom: 19%;
+  @include rmin('md') {
+    padding-bottom: 4.45rem;
+  }
+  @include rmin('lg') {
+    padding-bottom: 6.15rem;
+  }
+  @include rmin('hi') {
+    padding-bottom: 5.75vw;
+  }
+}
+
+.container-inset--m100 {
+  @include rmax('md') {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: $spacer $spacer 0 !important;
+  }
+}

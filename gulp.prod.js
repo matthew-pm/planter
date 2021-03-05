@@ -28,11 +28,12 @@ const DATA = (hash) => {
     // Paths to be used in your hbs files
     assets: {
       // CSS and JS are built full prod paths to the output files
-      css: `${config.prod.root}/${utils.infix(hash, config.js.output)}`,
+      css: `${config.prod.root}/${utils.infix(hash, config.styles.output)}`,
       js: `${config.prod.root}/${utils.infix(hash, config.js.output)}`,
       // This is just the static directory
       // Usage: "{{@root.assets.static}}/image.png"
-      static: `${config.prod.root}/images`
+      static: `${config.prod.root}/images`,
+      shared: `${config.prod.shared}` ,
     }
   }
 }
@@ -82,7 +83,8 @@ function html() {
       .data(DATA(HASH))
       .data({production: true})
       .data(config.html.match.data)
-      .partials(config.html.match.partials)
+      .partials(config.html.match.templates)
+      .partials(config.html.match.partials, !config.html.match.templates)
       .helpers(require('handlebars-layouts'))
       .helpers(config.html.match.helpers)
     )
@@ -102,7 +104,7 @@ function refresh(cb) {
 
 function static() {
   // Copy ./static and its contents to the prod path
-  return gulp.src(['./static/*', '!./static/favicon.*', '!./static/common'])
+  return gulp.src(['./static/*', '!./static/favicon.*', '!./static/shared'])
     .pipe(gulp.dest(`${config.prod.dir}/${config.prod.static}`));
 }
 
