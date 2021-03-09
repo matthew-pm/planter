@@ -5,7 +5,6 @@ module.exports = {
     lang: 'en',
   },
   build: {
-    // dev, prod
     dir: './build',
     js: '',
     css: '',

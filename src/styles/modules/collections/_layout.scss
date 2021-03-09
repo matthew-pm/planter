@@ -39,6 +39,21 @@
 //   }
 // }
 
+// .container--withCopy {
+//   padding-bottom: 0 !important;
+//   margin-bottom: 0;
+//   .copy-row .quote  {
+//     // padding-bottom: $spacer;
+//     margin-bottom: ($spacer * 1);
+//     @include rmin('md') {
+//       margin-bottom: ($spacer * 7.5);
+//     }
+//   }
+//   .img-row {
+//     margin-bottom: 0;
+//   }
+// }
+
 .col-full {
   position: relative;
   flex-grow: 1;

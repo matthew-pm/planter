@@ -5,7 +5,6 @@ function animateOnScroll(element) {
   let top = window.pageYOffset + window.innerHeight;
   let isVisible = top > element.offsetTop + offset;
   if (isVisible) element.classList.add('animate-in');
-  console.log(element, isVisible);
 }
 
 export function attach() {
