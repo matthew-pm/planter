@@ -6,10 +6,10 @@
   {{/extend}}  
 {{/if}}
 {{#if @root.production }}
-  {{#extend "template-prod" }}
-    {{#content "body" }}
-      {{#block "content" }}{{/block}}
-    {{/content}}
-  {{/extend}}  
+{{#extend "template-prod" }}
+{{#content "body" }}
+{{#block "content" }}{{/block}}
+{{/content}}
+{{/extend}}  
 {{/if}}
 

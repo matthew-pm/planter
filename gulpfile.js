@@ -21,7 +21,7 @@ const smoosher = require('gulp-smoosher');
 // const { prod } = require('./gulp.prod.js');
 
 // No-op prod bc we don't need it for this
-const prod = (cb) => cb();
+// const prod = (cb) => cb();
 
 // Configure global data (passed to handlebars)
 const DATA = {
@@ -54,17 +54,17 @@ const options = {
 // Compile CSS using sass
 function styles() {
   return gulp.src(config.styles.entry)
-    .pipe(sourcemaps.init())
+    // .pipe(sourcemaps.init())
     .pipe(sass(options.styles).on('error', sass.logError))
     .pipe(rename(
       config.styles.output
     ))
-    .pipe(sourcemaps.write())
+    // .pipe(sourcemaps.write())
     .pipe(gulp.dest(config.build.dir));
 }
 
 // Compile JS using browserify & babel
-function js(prod) {
+function js() {
   return browserify({
       entries: config.js.entry, 
       debug: true
@@ -102,6 +102,27 @@ function html() {
     .pipe(gulp.dest(config.build.dir));
 }
 
+function prod() {
+  let filename = '';
+  return gulp.src(config.html.entry)
+    .pipe(smoosher({base: config.build.dir}))
+    .pipe(handlebars()
+      .data(DATA)
+      .data({production: true})
+      .data(config.html.match.data)
+      .partials(config.html.match.templates)
+      .partials(config.html.match.partials, !config.html.match.templates)
+      .helpers(require('handlebars-layouts'))
+      .helpers(config.html.match.helpers)
+    )
+    .pipe(rename((path) => {
+      path.basename = 'prod';
+      path.extname = '.html';
+    }))
+    .pipe(gulpif(options.html, beautify.html(options.html)))
+    .pipe(gulp.dest(config.build.dir));
+}
+
 function static() {
   // Copy ./static and its contents to the build path
   const static = gulp.src(['./static/**/*', '!./static/favicon.*'])
@@ -132,9 +153,9 @@ function watch() {
     config.html.match.partials,
     config.html.match.helpers,
     config.html.match.data,
-  ], options, html).on('change', browserSync.reload);
+  ], options, series(html, prod)).on('change', browserSync.reload);
 
-  gulp.watch('./build/*', { ignoreInitial: true }, prod);
+  // gulp.watch('./build/*', { ignoreInitial: true }, prod);
 }
 
 function develop() {
