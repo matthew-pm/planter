@@ -1,0 +1,20 @@
+<div class="layered">
+  <div class="layered__top">
+    <div class="shoppable">
+      <picture>
+        <source srcset="{{@root.assets.static}}/{{set}}-top.jpg?$staticlink$" media="(min-width: 992px)">
+        <img class="img" src="{{@root.assets.static}}/{{set}}-top-m.jpg?$staticlink$">
+      </picture>
+      {{> shop-overlay set=set }}
+    </div>
+    {{#if label}}
+    <p class="copy mb-0 pr-0 text-right">{{label}}</p>
+    {{/if}}
+  </div>
+  <div class="layered__bottom">
+    <picture>
+      <source srcset="{{@root.assets.static}}/{{set}}-bottom.jpg?$staticlink$" media="(min-width: 992px)">
+      <img class="img" src="{{@root.assets.static}}/{{set}}-bottom-m.jpg?$staticlink$">
+    </picture>
+  </div>
+</div>

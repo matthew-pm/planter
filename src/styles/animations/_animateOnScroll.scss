@@ -1,0 +1,40 @@
+.animate-on-scroll {
+  // transform: translateY(45px);
+  opacity: 0;
+}
+.animate-in {
+  // $easing: cubic-bezier(0.65, 0, 0.35, 1);
+  // $easing: cubic-bezier(0.83, 0, 0.17, 1);
+  // $easing: cubic-bezier(0.32, 0, 0.67, 0);
+  $easing: cubic-bezier(0, 0.55, 0.45, 1);
+  animation: 1s $easing 0.2s fadeInMobile forwards;
+  @include rmin('md') {
+    animation: 1s $easing 0.2s fadeIn forwards;
+  }
+}
+@keyframes fadeIn {
+  0% { 
+    opacity: 0;
+    transform: translateY(45px);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    tranform: translateY(0);
+  }
+}
+@keyframes fadeInMobile {
+  0% { 
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    tranform: translateY(0);
+  }
+}

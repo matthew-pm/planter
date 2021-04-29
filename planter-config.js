@@ -5,7 +5,6 @@ module.exports = {
     lang: 'en',
   },
   build: {
-    // dev, prod
     dir: './build',
     js: '',
     css: '',
@@ -18,6 +17,7 @@ module.exports = {
     js: 'assets',
     css: 'assets',
     static: `images`,
+    shared: 'common',
   },
   styles: {
     entry: './src/styles/style.scss',
@@ -39,6 +39,7 @@ module.exports = {
     entry: './src/views/*.{hbs,html}',
     match : {
       pages: './src/views/*.{hbs,html}',
+      templates: './src/views/partials/templates/**/*.hbs',
       partials: './src/views/partials/**/*.hbs',
       helpers: './src/views/helpers/**/*.js',
       data: './src/data/**/*.{js,json}',

@@ -1,0 +1,27 @@
+<button class="shop-overlay__btn shop-overlay__btn--mobile">
+  <img src="{{@root.assets.shared}}/icons/bag-fill-white.svg?$staticlink$" alt="Shop icon">
+  <span>Shop</span>
+</button>
+<div class="shop-overlay">
+  <div class="shop-overlay__btn-wrapper">
+    <button class="shop-overlay__btn">
+      <img src="{{@root.assets.shared}}/icons/bag-fill-white.svg?$staticlink$" alt="Shop icon">
+      <span>Shop the Look</span>
+    </button>
+    <div class="shop-overlay__contrast-bg">
+    </div>
+  </div>
+  <div class="shop-overlay__inner-wrapper">
+    <div class="shop-overlay__inner">
+      <div class="shop-overlay__title-bar">
+        <div class="shop-overlay__heading">Shop the Look</div>
+        <div class="shop-overlay__close">
+          <img src="{{@root.assets.shared}}/icons/close.svg?$staticlink$" alt="Close icon">
+        </div>
+      </div>
+      <div class="shop-overlay__products" data-set-id="{{set}}">
+        <span class="shop-overlay__loading">Loading...</span>
+      </div>
+    </div>
+  </div>
+</div>

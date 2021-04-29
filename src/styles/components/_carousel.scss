@@ -1,0 +1,86 @@
+// Slick overrides
+
+.carousel {
+  position: relative;
+  
+  .carousel__arrow {
+    display: inline-block;
+    position: absolute;    
+    z-index: 1;
+    color: #cccccc;
+    background-color: transparent;
+    border: 0;
+    width: 28px;
+    top: calc(50% - 2.25rem);
+    transition: 0.3s ease-in-out;
+
+    @include rmin('sm') {
+      width: 32px;
+      top: calc(50% - 2.5rem);
+    }
+    @include rmin('md') {
+      width: 40px;
+      top: calc(50% - 2.5rem);
+    }
+
+    &:hover,
+    &:focus {
+      outline: 0;
+      color: $color-gray;
+    }
+    
+    svg, 
+    path {
+      fill: currentColor;
+    }
+
+    &--prev {
+      svg { 
+        transform: rotate(180deg);
+       }
+      left: -1.5rem;
+      @include rmin('md') {
+        left: -2.75rem;
+      }
+    }
+    &--next {
+      right: -1.5rem;
+      @include rmin('md') {
+        right: -2.75rem;
+      }
+    }
+  }
+
+  .carousel__item {
+    display: inline-block;
+    // max-width: 50%;
+    padding: 0 1.25rem;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    img {
+      display: block;
+      width: 100%;
+      transition: 0.2s ease-in;
+    }
+    div.carousel__description {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      margin: .875rem auto 0;
+      font-size: 1.25rem;
+      color: $color-navy;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      outline: 0;
+      img {
+        filter: saturate(50%) brightness(70%);
+      }
+    }
+  }
+}

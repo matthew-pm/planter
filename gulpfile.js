@@ -41,7 +41,8 @@ const DATA = {
       : `${config.build.js}/${config.js.output}`,
     // This is just the static directory
     // Usage: "{{@root.assets.static}}/image.png"
-    static: `${config.build.static}`
+    static: `${config.build.static}`,
+    shared: `${config.build.shared}`,
   }
 }
 
@@ -90,7 +91,8 @@ function html() {
       .data(DATA)
       .data({development: true})
       .data(config.html.match.data)
-      .partials(config.html.match.partials)
+      .partials(config.html.match.templates)
+      .partials(config.html.match.partials, !config.html.match.templates)
       .helpers(require('handlebars-layouts'))
       .helpers(config.html.match.helpers)
     )
@@ -103,7 +105,7 @@ function html() {
 
 function static() {
   // Copy ./static and its contents to the build path
-  const static = gulp.src(['./static/*', '!./static/favicon.*'])
+  const static = gulp.src(['./static/**/*', '!./static/favicon.*'])
     .pipe(gulp.dest(`${config.build.dir}/${config.build.static}`));
 
   // Copy favicon files separately from the other static files
