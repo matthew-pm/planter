@@ -85,7 +85,6 @@ function js() {
 function html() {
   let filename = '';
   return gulp.src(config.html.entry)
-    .pipe(smoosher({base: config.build.dir}))
     .pipe(handlebars()
       .data(DATA)
       .data({development: true})
@@ -105,7 +104,6 @@ function html() {
 function prod() {
   let filename = '';
   return gulp.src(config.html.entry)
-    .pipe(smoosher({base: config.build.dir}))
     .pipe(handlebars()
       .data(DATA)
       .data({production: true})
@@ -115,6 +113,7 @@ function prod() {
       .helpers(require('handlebars-layouts'))
       .helpers(config.html.match.helpers)
     )
+    .pipe(smoosher({base: config.build.dir}))
     .pipe(rename((path) => {
       path.basename = 'prod';
       path.extname = '.html';
