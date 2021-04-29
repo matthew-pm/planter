@@ -1,6 +1,6 @@
 import { requestProductData } from './modules/utils';
 import { createShoppableElement, initializeShoppableListeners } from './modules/shopabble';
-import * as animateOnScroll from './modules/animateOnScroll';
+import * as animateOnScroll from './modules/animate';
 
 // EXAMPLE
 // Local product info
