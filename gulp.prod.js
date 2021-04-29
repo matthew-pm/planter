@@ -16,6 +16,7 @@ const babelify = require('babelify');
 const sourcemaps = require('gulp-sourcemaps');
 const beautify = require('gulp-beautify');
 const terser = require('gulp-terser');
+const smoosher = require('gulp-smoosher');
 
 let HASH = utils.hash();
 
@@ -28,8 +29,8 @@ const DATA = (hash) => {
     // Paths to be used in your hbs files
     assets: {
       // CSS and JS are built full prod paths to the output files
-      css: `${config.prod.root}/${utils.infix(hash, config.styles.output)}`,
-      js: `${config.prod.root}/${utils.infix(hash, config.js.output)}`,
+      css: `${config.prod.root}/${utils.infix('', config.styles.output)}`,
+      js: `${config.prod.root}/${utils.infix('', config.js.output)}`,
       // This is just the static directory
       // Usage: "{{@root.assets.static}}/image.png"
       static: `${config.prod.root}/images`,
@@ -51,7 +52,7 @@ function styles() {
     .pipe(sourcemaps.init())
     .pipe(sass(options.styles).on('error', sass.logError))
     .pipe(rename(
-      utils.infix(HASH, config.styles.output)
+      utils.infix('', config.styles.output)
     ))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(`${config.prod.dir}/${config.prod.css}`));
@@ -79,6 +80,7 @@ function js() {
 function html() {
   let filename = '';
   return gulp.src(config.html.entry)
+    .pipe(smoosher({base: `${config.prod.dir}/assets`}))
     .pipe(handlebars()
       .data(DATA(HASH))
       .data({production: true})

@@ -17,13 +17,11 @@ const sourcemaps = require('gulp-sourcemaps');
 const beautify = require('gulp-beautify');
 const terser = require('gulp-terser');
 const browserSync = require('browser-sync').create();
+const smoosher = require('gulp-smoosher');
+// const { prod } = require('./gulp.prod.js');
 
-const { prod } = require('./gulp.prod.js');
-
-
-
-
-
+// No-op prod bc we don't need it for this
+const prod = (cb) => cb();
 
 // Configure global data (passed to handlebars)
 const DATA = {
@@ -87,6 +85,7 @@ function js(prod) {
 function html() {
   let filename = '';
   return gulp.src(config.html.entry)
+    .pipe(smoosher({base: config.build.dir}))
     .pipe(handlebars()
       .data(DATA)
       .data({development: true})
